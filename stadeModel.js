@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 var stadeSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     capacity: {
         type: Number,
@@ -21,6 +22,10 @@ var stadeSchema = mongoose.Schema({
     phone: {
         type: String,
         required: true
+    },
+    available: {
+        type: Boolean,
+        default: true
     },
     
 });

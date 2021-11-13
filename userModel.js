@@ -1,5 +1,6 @@
 // userModel.js
 var mongoose = require('mongoose');
+const {Schema} = require('mongoose');
 // Setup schema
 var userSchema = mongoose.Schema({
     firstName: {
@@ -12,7 +13,8 @@ var userSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -28,6 +30,13 @@ var userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    /*team: {
+        type: Schema.Types.ObjectId,
+        ref: 'match',
+        default: null,
+        required: false
+    }*/
+    
 });
 // Export Contact model
 var User = module.exports = mongoose.model('user', userSchema);

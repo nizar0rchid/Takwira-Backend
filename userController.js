@@ -1,6 +1,9 @@
 
 User = require('./userModel');
 // Handle index actions
+
+
+
 exports.index = function (req, res) {
     User.get(function (err, users) {
         if (err) {
@@ -17,7 +20,7 @@ exports.index = function (req, res) {
     });
 };
 // Handle create contact actions
-exports.new = function (req, res) {
+exports.new = async (req, res)=> {
     var user = new User();
     user.firstName = req.body.firstName ? req.body.firstName : user.firstName;
     user.lastName = req.body.lastName;
@@ -26,16 +29,27 @@ exports.new = function (req, res) {
     user.age = req.body.age;
     user.phone = req.body.phone;
     user.location = req.body.location;
-// save the contact and check for errors
-    user.save(function (err) {
-        // if (err)
-        //     res.json(err);
-res.json({
-            message: 'New user created!',
-            data: user
-        });
-    });
+    user.role = req.body.role;
+    user.team =req.body.team;
+    
+    try {
+        await User.create(user);
+        return res.status(200).json({
+            message: 'User added successfully !',
+            data : user
+        })
+    } catch(error) {
+        console.log("User already exists !");
+        console.log(user);
+        return res.status(500).json({
+            message: 'User already exists !'
+        })
+    }
 };
+
+
+
+
 // Handle view contact info
 exports.view = function (req, res) {
     User.findById(req.params.user_id, function (err, user) {
@@ -48,7 +62,7 @@ exports.view = function (req, res) {
     });
 };
 // Handle update contact info
-exports.update = function (req, res) {
+exports.update = async (req, res) => {
 User.findById(req.params.user_id, function (err, user) {
         if (err)
             res.send(err);
@@ -59,6 +73,9 @@ User.findById(req.params.user_id, function (err, user) {
         user.age = req.body.age;
         user.phone = req.body.phone;
         user.location = req.body.location;
+        user.role = req.body.role;
+        user.team =req.body.team;
+        
 // save the contact and check for errors
         user.save(function (err) {
             if (err)
