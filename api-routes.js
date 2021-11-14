@@ -31,5 +31,20 @@ router.route('/stades/:stade_id')
     .patch(stadeController.update)
     .put(stadeController.update)
     .delete(stadeController.delete);
+
+
+ // Import contact controller
+var matchController = require('./matchController');
+// Contact routes
+router.route('/match')
+    .get(matchController.index)
+    .post(matchController.new);
+router.route('/match/:match_id')
+    .get(matchController.view)
+    .patch(matchController.cancel)
+    .put(matchController.update)
+    .delete(matchController.delete);
+
+
 // Export API routes
 module.exports = router;

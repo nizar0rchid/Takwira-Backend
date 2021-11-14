@@ -30,12 +30,7 @@ var userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    /*team: {
-        type: Schema.Types.ObjectId,
-        ref: 'match',
-        default: null,
-        required: false
-    }*/
+    
     
 });
 // Export Contact model

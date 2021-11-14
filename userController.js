@@ -30,7 +30,6 @@ exports.new = async (req, res)=> {
     user.phone = req.body.phone;
     user.location = req.body.location;
     user.role = req.body.role;
-    user.team =req.body.team;
     
     try {
         await User.create(user);
@@ -52,15 +51,53 @@ exports.new = async (req, res)=> {
 
 // Handle view contact info
 exports.view = function (req, res) {
-    User.findById(req.params.user_id, function (err, user) {
+    Match.findById(req.params.match_id, function (err, match) {
         if (err)
             res.send(err);
         res.json({
-            message: 'user details loading..',
-            data: user
+            message: 'Match details loading..',
+            data: match
         });
     });
 };
+
+
+
+
+
+
+exports.update = async (req, res) => {
+User.findById(req.params.user_id, function (err, user) {
+        if (err)
+            res.send(err);
+        user.firstName = req.body.firstName ? req.body.firstName : user.firstName;
+        user.lastName = req.body.lastName;
+        user.email = req.body.email;
+        user.password = req.body.password;
+        user.age = req.body.age;
+        user.phone = req.body.phone;
+        user.location = req.body.location;
+        user.role = req.body.role;
+        
+// save the contact and check for errors
+        user.save(function (err) {
+            if (err)
+                res.json(err);
+            res.json({
+                message: 'user Info updated',
+                data: user
+            });
+        });
+    });
+};
+
+
+
+
+
+
+
+
 // Handle update contact info
 exports.update = async (req, res) => {
 User.findById(req.params.user_id, function (err, user) {
@@ -74,7 +111,6 @@ User.findById(req.params.user_id, function (err, user) {
         user.phone = req.body.phone;
         user.location = req.body.location;
         user.role = req.body.role;
-        user.team =req.body.team;
         
 // save the contact and check for errors
         user.save(function (err) {
