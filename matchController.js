@@ -1,19 +1,21 @@
 Match = require('./matchModel');
+
 // Handle index actions
 exports.index = function (req, res) {
     Match.get(function (err, matches) {
-        if (err) {
+            if (err) {
+                res.json({
+                    status: "error",
+                    message: err,
+                });
+            }
             res.json({
-                status: "error",
-                message: err,
+                status: "success",
+                message: "Matches retrieved successfully",
+                data: matches
             });
-        }
-        res.json({
-            status: "success",
-            message: "Matches retrieved successfully",
-            data: matches
         });
-    });
+    
 };
 
 

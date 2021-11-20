@@ -1,8 +1,9 @@
 // api-routes.js
 // Initialize express router
 let router = require('express').Router();
+const auth = require("./auth");
 // Set default API response
-router.get('/', function (req, res) {
+router.get('/', auth,function (req, res) {
     res.json({
         status: 'API Is Working',
         message: 'Welcome !',
@@ -10,9 +11,11 @@ router.get('/', function (req, res) {
 });
 // Import contact controller
 var userController = require('./userController');
+router.route('/login')
+    .post(userController.login)
 // Contact routes
 router.route('/users')
-    .get(userController.index)
+    .get(auth,userController.index)
     .post(userController.new);
 router.route('/users/:user_id')
     .get(userController.view)
@@ -45,6 +48,9 @@ router.route('/match/:match_id')
     .put(matchController.update)
     .delete(matchController.delete);
 
+// var liveMatches = require('./footApi');
 
-// Export API routes
+// router.route('/live')
+//     .get(liveMatches.data);
+//Export API routes
 module.exports = router;

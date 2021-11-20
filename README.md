@@ -4,7 +4,10 @@ A backend Server for iOS mini project. API implementation with NodeJs, Express a
 
 The api uri preceed all API endpoints and the following endpoints are currently available :
 
-* **GET**  /api/users
+used bcyptjs to hash passwords and jsonwebtoken to manage authentification and authorization
+
+* **POST**  /api/login
+* **GET**  /api/users    (requires a valid token to show all users)
 * **POST** /api/users
 * **GET** /api/users/:id
 * **PUT** /api/users/:id
@@ -17,8 +20,8 @@ The api uri preceed all API endpoints and the following endpoints are currently 
 * **DELETE** /api/stades/:id
 ----------------------------
 * **GET**  /api/match (show all matches)
-* **POST** /api/match (create new match takes team capacity as a parasmeter)
+* **POST** /api/match (create new match takes team capacity as a parameter)
 * **GET** /api/match/:id (show specific match details)
 * **PUT** /api/match/:id (join existing match, takes either teamA or teamB as parameter team = teamA)
-* **PATCH** /api/match/:id (cancel join existing match, takes either teamA or teamB as parameter team = teamAh)
-* **DELETE** /api/match/:id (delete or cance a whole match)
+* **PATCH** /api/match/:id (cancel join existing match, takes either teamA or teamB as parameter team = teamA)
+* **DELETE** /api/match/:id (delete or cancel a whole match)

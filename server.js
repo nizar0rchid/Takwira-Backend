@@ -1,3 +1,4 @@
+require("dotenv").config();
 // Import express
 let express = require('express');
 // Import Body parser
@@ -6,6 +7,7 @@ let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 // Initialise the app
 let app = express();
+
 
 // Import routes
 let apiRoutes = require("./api-routes");
@@ -36,8 +38,9 @@ app.use('/api', apiRoutes);
 app.listen(port, function () {
     console.log("Running on port " + port);
 });
-    
 
+ // let footApi = require('./footApi.js');
+ // footApi.data();    
 
 
 
