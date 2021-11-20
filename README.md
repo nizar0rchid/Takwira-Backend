@@ -1,10 +1,10 @@
 # Takwira-Backend Server
 
 A backend Server for iOS mini project. API implementation with NodeJs, Express and MongoDb
+Used bcyptjs to hash passwords and jsonwebtoken to manage authentification and authorization
+Currently supporting ElenaSport Api to fetch all live matches (dev still in progress)
 
 The api uri preceed all API endpoints and the following endpoints are currently available :
-
-used bcyptjs to hash passwords and jsonwebtoken to manage authentification and authorization
 
 * **POST**  /api/login
 * **GET**  /api/users    (requires a valid token to show all users)
