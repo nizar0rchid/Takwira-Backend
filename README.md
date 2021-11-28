@@ -25,3 +25,5 @@ The api uri preceed all API endpoints and the following endpoints are currently 
 * **PUT** /api/match/:id (join existing match, takes either teamA or teamB as parameter team = teamA)
 * **PATCH** /api/match/:id (cancel join existing match, takes either teamA or teamB as parameter team = teamA)
 * **DELETE** /api/match/:id (delete or cancel a whole match)
+----------------------------
+* **GET** /api/live (get all live matches in the world)

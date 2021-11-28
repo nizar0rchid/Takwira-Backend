@@ -48,9 +48,9 @@ router.route('/match/:match_id')
     .put(matchController.update)
     .delete(matchController.delete);
 
-// var liveMatches = require('./footApi');
+var liveMatches = require('./footApi');
 
-// router.route('/live')
-//     .get(liveMatches.data);
+router.route('/live')
+    .get(liveMatches.data);
 //Export API routes
 module.exports = router;

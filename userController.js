@@ -84,7 +84,7 @@ exports.login = async (req, res)=> {
 
     // Validate user input
     if (!(email && password)) {
-      res.status(400).send("All input is required");
+      res.status(401).send("All input is required");
     }
     // Validate if user exist in our database
     const user = await User.findOne({ email });

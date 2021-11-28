@@ -35,7 +35,7 @@ exports.new = async (req, res)=> {
             for (var i = 0; i < match.teamCapacity; i++) {
                 //console.log("for statement passed") //debug
                 if (match.teamA[i] == null){
-                    match.teamA[i] = "User ID";
+                    match.teamA[i] = "User ID";   //remember to change
                     break;
                 }
                 else
