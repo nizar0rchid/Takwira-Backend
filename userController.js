@@ -115,16 +115,12 @@ exports.login = async (req, res)=> {
 
 // Handle view contact info
 exports.view = function (req, res) {
-    Match.findById(req.params.user_id, function (err, user) {
+    User.findById(req.params.user_id, function (err, user) {
         if (err)
             res.send(err);
-        res.json({
-            message: 'User details loading..',
-            data: user
-        });
+        res.status(201).json(user);
     });
 };
-
 
 
 
