@@ -30,6 +30,9 @@ var userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    profilePic: {
+        type: String
+    },
     token: { 
         type: String 
     },

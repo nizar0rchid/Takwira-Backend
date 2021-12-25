@@ -2,8 +2,34 @@
 // Initialize express router
 let router = require('express').Router();
 const auth = require("./auth");
+
+const multer = require('multer')
+const path = require('path')
+
+
+const storage = multer.diskStorage({
+      destination(req,file, cb){
+          cb(null,'./upload/images')
+      },
+      filename(req,file,cb){
+          cb(null,`${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+      }
+  })
+  const fileFilter = (req,file,cb)=>{
+        if(file.mimetype==='image/jpeg' || file.mimetype ===  'image/jpg'){
+              cb(null,true);
+        }else{
+              cb(null,false);
+        }
+  }
+  const upload = multer({storage: storage,fileFilter: fileFilter
+      })
+
+
+
+
 // Set default API response
-router.get('/', auth,function (req, res) {
+router.get('/',function (req, res) {
     res.json({
         status: 'API Is Working',
         message: 'Welcome !',
@@ -15,13 +41,15 @@ router.route('/login')
     .post(userController.login)
 // Contact routes
 router.route('/users')
-    .get(auth,userController.index)
+    .get(userController.index)  //get(auth,userController.index)
     .post(userController.new);
 router.route('/users/:user_id')
     .get(userController.view)
     .patch(userController.update)
-    .put(userController.update)
+    .put(upload.single('image'),userController.pic)
     .delete(userController.delete);
+router.route('/find/:email')
+    .get(userController.findemail);
 
  // Import contact controller
 var stadeController = require('./stadeController');

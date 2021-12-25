@@ -20,6 +20,26 @@ exports.index = function (req, res) {
         });
     });
 };
+
+//profile pic upload
+exports.pic = async (req, res) => {
+User.findById(req.params.user_id, function (err, user) {
+        if (err)
+            res.send(err);
+        user.profilePic = req.file.path
+// save the contact and check for errors
+        user.save(function (err) {
+            if (err)
+                res.json(err);
+            res.json({
+                message: 'photo updated successfully',
+                data: user
+            });
+        });
+    });
+};
+
+
 // Sign up 
 exports.new = async (req, res)=> {
     try {
@@ -113,12 +133,25 @@ exports.login = async (req, res)=> {
 };
 
 
+
 // Handle view contact info
 exports.view = function (req, res) {
     User.findById(req.params.user_id, function (err, user) {
         if (err)
             res.send(err);
         res.status(201).json(user);
+    });
+};
+
+
+
+exports.findemail = function (req, res) {
+      const mail = req.params.email;
+     User.findOne({email: mail}, function (err, user){
+        if (err)
+            res.send(err);
+        res.status(201).json(user);
+        console.log(user);
     });
 };
 

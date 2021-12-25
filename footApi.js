@@ -5,7 +5,7 @@ var request = require('request');
 
 	const options = {
   method: 'GET',
-  url: 'https://elenasport-io1.p.rapidapi.com/v2/inplay',
+  url: 'https://elenasport-io1.p.rapidapi.com/v2/upcoming',
   qs: {page: '1'},
   headers: {
     'x-rapidapi-host': 'elenasport-io1.p.rapidapi.com',
