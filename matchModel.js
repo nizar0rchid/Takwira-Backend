@@ -2,9 +2,13 @@ var mongoose = require('mongoose');
 // Setup schema
 var matchSchema = mongoose.Schema({
     
-	teamCapacity: {
+    teamCapacity: {
         type: Number,
         required: false
+    },
+
+    stadeId: {
+        type: String,
     },
 
     teamA: [{

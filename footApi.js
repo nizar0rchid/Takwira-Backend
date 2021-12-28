@@ -9,7 +9,7 @@ var request = require('request');
   qs: {page: '1'},
   headers: {
     'x-rapidapi-host': 'elenasport-io1.p.rapidapi.com',
-    'x-rapidapi-key': '7fed2fa1fbmsh5bcc901d16cc9f4p1c4c68jsnb73db43bc5ec',
+    'x-rapidapi-key': 'c0b1f624ebmsh68b7c432fb7f924p167801jsn14dc19e4a1a3',
     useQueryString: true
   }
 };

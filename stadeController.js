@@ -2,6 +2,7 @@
 Stade = require('./stadeModel');
 // Handle index actions
 exports.index = function (req, res) {
+
     Stade.get(function (err, stades) {
         if (err) {
             res.json({
@@ -9,13 +10,34 @@ exports.index = function (req, res) {
                 message: err,
             });
         }
-        res.json({
-            status: "success",
-            message: "Stades retrieved successfully",
-            data: stades
+        res.json(
+            stades
+        );
+    });
+};
+
+
+exports.pic = async (req, res) => {
+Stade.findById(req.params.stade_id, function (err, stade) {
+        if (err)
+            res.send(err);
+        stade.image = req.file.path
+// save the contact and check for errors
+        stade.save(function (err) {
+            if (err)
+                res.json(err);
+            res.json({
+                message: 'photo updated successfully',
+                data: stade
+            });
         });
     });
 };
+
+
+
+
+
 // Handle create contact actions
 exports.new = async (req, res) => {
     var stade = new Stade();
@@ -24,16 +46,14 @@ exports.new = async (req, res) => {
     stade.price = req.body.price;
     stade.location = req.body.location;
     stade.phone = req.body.phone;
-    stade.available = req.body.available;
+    stade.DateTime = req.body.DateTime;
+    
 try {
-        await Stade.create(user);
-        return res.status(200).json({
-            message: 'Stade added successfully !',
-            data : stade
-        })
+        await Stade.create(stade);
+        return res.status(200).json(stade._id)
     } catch(error) {
-        console.log("Stade already exists !");
-        console.log(stade);
+        console.log(error);
+        //console.log(stade);
         return res.status(500).json({
             message: 'Stade already exists !'
         })

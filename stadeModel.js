@@ -2,10 +2,15 @@
 var mongoose = require('mongoose');
 // Setup schema
 var stadeSchema = mongoose.Schema({
+    
+    
+    DateTime: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     capacity: {
         type: Number,
@@ -23,9 +28,8 @@ var stadeSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    available: {
-        type: Boolean,
-        default: true
+    image: {
+        type: String
     },
     
 });

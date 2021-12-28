@@ -60,7 +60,7 @@ router.route('/stades')
 router.route('/stades/:stade_id')
     .get(stadeController.view)
     .patch(stadeController.update)
-    .put(stadeController.update)
+    .put(upload.single('image'),stadeController.pic)
     .delete(stadeController.delete);
 
 
@@ -70,8 +70,9 @@ var matchController = require('./matchController');
 router.route('/match')
     .get(matchController.index)
     .post(matchController.new);
-router.route('/match/:match_id')
-    .get(matchController.view)
+router.route('/match/:stade_id')
+    .get(matchController.view);
+router.route('/match/:match_id')    
     .patch(matchController.cancel)
     .put(matchController.update)
     .delete(matchController.delete);

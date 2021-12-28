@@ -9,6 +9,7 @@ exports.index = function (req, res) {
                     message: err,
                 });
             }
+
             res.json({
                 status: "success",
                 message: "Matches retrieved successfully",
@@ -23,6 +24,9 @@ exports.index = function (req, res) {
 exports.new = async (req, res)=> {
     var match = new Match();
     match.teamCapacity = req.body.teamCapacity;
+    match.stadeId = req.body.stadeId;
+    userId = req.body.userId;
+    
     var teamA = [];
     var teamB = [];
     teamA.length = match.teamCapacity
@@ -35,7 +39,7 @@ exports.new = async (req, res)=> {
             for (var i = 0; i < match.teamCapacity; i++) {
                 //console.log("for statement passed") //debug
                 if (match.teamA[i] == null){
-                    match.teamA[i] = "User ID";   //remember to change
+                    match.teamA[i] = userId;   //remember to change
                     break;
                 }
                 else
@@ -49,7 +53,7 @@ exports.new = async (req, res)=> {
         
     } catch(error) {
             return res.status(500).json({
-                message : 'error'
+                message : error
             })
     }
 
@@ -59,13 +63,12 @@ exports.new = async (req, res)=> {
 
 // Handle view contact info
 exports.view = function (req, res) {
-    Match.findById(req.params.match_id, function (err, match) {
+    const stadeId = req.params.stade_id;
+    Match.findOne({stadeId: stadeId}, function (err, match) {
         if (err)
             res.send(err);
-        res.json({
-            message: 'match details loading..',
-            data: match
-        });
+
+        res.json(match);
     });
 };
 
@@ -77,8 +80,9 @@ Match.findById(req.params.match_id, function (err, match, user_id) {
         if (err)
             res.send(err);
         team = req.body.team
-        console.log(team);
-        user_id = "New user id" // passage statique id user (change later)
+
+        user_id = req.body.userId; // passage statique id user (change later)
+        
 
         if (team == "teamA"){
             for (var i = 0; i < match.teamCapacity; i++) {
@@ -112,9 +116,11 @@ exports.cancel = async (req, res) => {
 Match.findById(req.params.match_id, function (err, match, user_id) {
         if (err)
             res.send(err);
+
         team = req.body.team
-        console.log(team);
-        user_id = "New user id" // passage statique id user (change later)
+        
+        user_id = req.body.userId; // passage statique id user (change later)
+        
 
         if (team == "teamA"){
             for (var i = 0; i < match.teamCapacity; i++) {
