@@ -64,10 +64,7 @@ exports.view = function (req, res) {
     Stade.findById(req.params.stade_id, function (err, stade) {
         if (err)
             res.send(err);
-        res.json({
-            message: 'Stade details loading..',
-            data: stade
-        });
+        res.json(stade);
     });
 };
 // Handle update contact info

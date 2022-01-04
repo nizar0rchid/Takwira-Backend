@@ -13,13 +13,15 @@ var request = require('request');
     useQueryString: true
   }
 };
-exports.data = function getData(req, res){
+exports.data = async (req, res) => {
 	request(options, function (error, response, body) {
 
 		var liveMatches = [];
 			data = JSON.parse(body);
 			var matchesList = data['data'];
-		for(let i = 0; i < matchesList.length; i++){
+
+		try {
+			for(let i = 0; i < matchesList.length; i++){
 				
 				 liveMatches.push(
 				 {
@@ -38,6 +40,9 @@ exports.data = function getData(req, res){
 			}
 
 			res.status(201).json(liveMatches);
+		} catch(err) {
+			console.log(err)
+		}
 
 	});
 

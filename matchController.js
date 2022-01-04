@@ -10,11 +10,7 @@ exports.index = function (req, res) {
                 });
             }
 
-            res.json({
-                status: "success",
-                message: "Matches retrieved successfully",
-                data: matches
-            });
+            res.json(matches);
         });
     
 };
